@@ -7,7 +7,7 @@ thisdir = dirname(@__FILE__())
   """
 function loadFN()
   fname = joinpath(thisdir,"data","srep00196-s2.csv")
-  tbl=readtable(fname, allowcomments=true,eltypes=[String,String,Int])
+  tbl=readtable(fname, allowcomments=true,header=false,eltypes=[String,String,Int])
   n = size(tbl,1)
   V = sort!(unique(vcat(Vector(tbl[:,1]),Vector(tbl[:2]))))
   I::Vector{Int} = [findfirst(V,tbl[i,1]) for i in 1:n]
@@ -17,3 +17,7 @@ function loadFN()
 end
 
 
+function loadRCP()
+  fname = joinpath(thisdir,"data","srep00196-s3.csv")
+  readtable(fname, allowcomments=true,header=false)
+end
