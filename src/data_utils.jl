@@ -13,3 +13,12 @@ function neighbors(ingredient::String)
   ans = hcat(vcat(tmp1[1],tmp2[1]), vcat(tmp1[2],tmp2[2]))
   return ans[sortperm(ans[:,2], rev=true),:]
 end
+
+function hasthispair(ingredient1::String, ingredient2::String, k::Int)
+  (flavornet[k,1]==ingredient1 && flavornet[k,2]==ingredient2) ||
+    (flavornet[k,1]==ingredient2 && flavornet[k,2]==ingredient1)
+end
+
+function pairing(ingredient1::String, ingredient2::String)
+  flavornet[[i for i in 1:size(flavornet,1) if hasthispair(ingredient1,ingredient2,i)],:]
+end
