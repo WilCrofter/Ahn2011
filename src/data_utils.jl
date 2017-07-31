@@ -6,7 +6,7 @@ function read_flavornet()
                         allowcomments=true,header=false,eltypes=[String,String,Int])
 end
 
-type Flavornet
+immutable Flavornet
   ingredients::Vector{String}
   index::Dict{String,Int}
   W::SparseMatrixCSC{Int64,Int64}
@@ -37,24 +37,25 @@ function read_recipes()
   readtable(joinpath(thisdir,"data","srep00196-s3.csv"), allowcomments=true,header=false)
 end
 
-function neighbors(ingredient::String, flavornet::DataFrames.DataFrame)
-  tmp1 = flavornet[flavornet[:,1].==ingredient, [2,3]]
-  tmp2 = flavornet[flavornet[:,2].==ingredient, [1,3]]
-  ans = hcat(vcat(tmp1[1],tmp2[1]), vcat(tmp1[2],tmp2[2]))
-  return ans[sortperm(ans[:,2], rev=true),:]
+function reduce_recipe(df::DataFrames.DataFrame, row::Int; itr=2:size(df,2))
+  [df[row,i] for i in itr if typeof(df[row,i])==String]
 end
 
-function hasthispair(ingredient1::String, ingredient2::String, k::Int, flavornet::DataFrames.DataFrame)
-  (flavornet[k,1]==ingredient1 && flavornet[k,2]==ingredient2) ||
-    (flavornet[k,1]==ingredient2 && flavornet[k,2]==ingredient1)
-end
-
-function pairing(ingredient1::String, ingredient2::String, flavornet::DataFrames.DataFrame)
-  flavornet[[i for i in 1:size(flavornet,1) if hasthispair(ingredient1,ingredient2,i)],:]
-end
-
-function ingredients(recipe::Int, recipes::DataFrames.DataFrame)
-  tmp = recipes[recipe,:]
-  return [tmp[i][1] for i in 1:size(tmp,2) if typeof(tmp[i][1])==String]
+immutable Recipes
+  world::Dict{String,Vector{Vector{String}}}
+  regions::Vector{String}
+  
+  function Recipes()
+    rcp = read_recipes()
+    itr = 2:size(rcp,2)
+    world = Dict{String,Vector{Vector{String}}}()
+    regions = unique(rcp[:,1])
+    for region in regions
+      tmp = rcp[rcp[:,1].==region,:]
+      world[region] = [reduce_recipe(tmp,i,itr=itr) for i in 1:size(tmp,1)]
+    end
+    new(world,regions)
+  end
+    
 end
 

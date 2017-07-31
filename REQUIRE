@@ -1,5 +1,3 @@
 julia 0.5
 DataFrames
-LightGraphs
-Graft
 
