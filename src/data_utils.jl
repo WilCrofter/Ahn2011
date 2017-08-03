@@ -30,6 +30,17 @@ immutable Flavornet
     W = sparse(vcat(I,J),vcat(J,I),vcat(V,V))
     new(ingredients,index,W)
   end
+
+  function Flavornet(fn::Flavornet,ingredients::Vector{String})
+    ingredients=sort(intersect(ingredients,fn.ingredients))
+    index = Dict{String,Int}()
+    for i in eachindex(ingredients)
+      index[ingredients[i]]=i
+    end
+    tmp = [fn.index[i] for i in ingredients]
+    W = deepcopy(fn.W[tmp,tmp])
+    new(ingredients, index, W)
+  end
   
 end
 
