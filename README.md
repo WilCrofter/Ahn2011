@@ -1,6 +1,6 @@
 # Ahn 2011
 
-This is a module to facilitate (my) understanding of Ahn *et. al.* [Flavor network and the principles of food pairing](https://www.nature.com/articles/srep00196) Nature: SCIENTIFIC REPORTS | 1 : 196 | DOI: 10.1038/srep00196 (2011), which is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. This module includes some lightly edited, identically licensed versions of their data. The Julia code is GPLv3.
+This is a module to facilitate (my) understanding of Ahn *et. al.* [Flavor network and the principles of food pairing](https://www.nature.com/articles/srep00196) Nature: SCIENTIFIC REPORTS | 1 : 196 | DOI: 10.1038/srep00196 (2011), which is licensed as [CC-BY-NA-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/us/). This module includes some lightly edited, identically licensed versions of their supplementary data as well as similarly licensed data from a later paper, Ahn *et. al.*[THE FLAVOR NETWORK](http://yongyeol.com/2013/05/17/paper-flavor-network.html) Leonardo, Volume 46, Issue 3, June 2013, p.272-273 [CC-BY-NA-SA 4.0](https://creativecommons.org/licenses/by/4.0/). The Julia code is GPLv3.
 
 I was introduced to the general topic in a blog post, [Data Analysis in the Kitchen](https://blog.frontiersin.org/2017/07/20/frontiers-in-ict-data-analysis-in-the-kitchen/), by the open access scientific publisher [Frontiers](https://frontiersin.org). A perspective article explains the appeal:
 

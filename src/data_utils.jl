@@ -70,3 +70,16 @@ immutable Recipes
     
 end
 
+function read_ingr_info()
+  readtable(joinpath(thisdir,"data","ingr_info.tsv"),
+            allowcomments=true,header=false,eltypes=[Int,String,String])
+end
+
+function categories()
+  tbl = read_ingr_info()
+  ans = Dict{String,String}()
+  for rw in eachrow(tbl)
+    ans[rw[:x2]] = rw[:x3]
+  end
+  ans
+end
