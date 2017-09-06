@@ -55,3 +55,11 @@ function apply_kmeans(fn::Flavornet, k::Int)
   end
   return R, content
 end
+
+""" dffind(df, value, column)
+
+  Return the row(s) of a DataFrame, df,  with the specified `value` in the named `column`.
+  """
+function dffind{T}(df::DataFrame, value::T, column::Symbol)
+  df[df[column].==value,:]
+end

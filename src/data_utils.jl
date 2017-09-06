@@ -70,9 +70,12 @@ immutable Recipes
     
 end
 
+"""
+  Reads ingr_info.tsv into a DataFrame with columns "id",  "name", and "category", examples of the last being meat, plant, plant derivative etc.
+  """
 function read_ingr_info()
   readtable(joinpath(thisdir,"data","ingr_info.tsv"),
-            allowcomments=true,header=false,eltypes=[Int,String,String])
+            allowcomments=true,header=false,eltypes=[Int,String,String],names=[:id, :name, :category])
 end
 
 function categories()

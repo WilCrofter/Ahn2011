@@ -1,4 +1,4 @@
-This module includes lightly edited version of supplementary data from Ahn *et. al.* [Flavor network and the principles of food pairing](https://www.nature.com/articles/srep00196) Nature: SCIENTIFIC REPORTS | 1 : 196 | DOI: 10.1038/srep00196 (2011), which is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. The versions included here are identically licensed.
+This module includes lightly edited versions of supplementary data from Ahn *et. al.* [Flavor network and the principles of food pairing](https://www.nature.com/articles/srep00196) Nature: SCIENTIFIC REPORTS | 1 : 196 | DOI: 10.1038/srep00196 (2011), which is licensed [CC-BY-NA-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/us/) as well as similarly licensed ([CC-BY-NA-SA 4.0](https://creativecommons.org/licenses/by/4.0/)) data from a later paper, Ahn *et. al.*[THE FLAVOR NETWORK](http://yongyeol.com/2013/05/17/paper-flavor-network.html) Leonardo, Volume 46, Issue 3, June 2013, p.272-273. The derivative versions included here are identically licensed.
 
 Julia code in the Ahn2011  module is licensed under the GPLv3.
 
