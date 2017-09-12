@@ -1,10 +1,37 @@
 
 thisdir = dirname(@__FILE__())
 
+# Read raw data into DataFrames
+
+"""
+  Reads srep00196-s2.csv into a DataFrame with columns :name1, :name2, and :common_flavors. The first two columns name pairs of ingredients, the third gives the number of common flavor compounds.
+  """
 function read_flavornet()
   readtable(joinpath(thisdir,"data","srep00196-s2.csv"),
-                        allowcomments=true,header=false,eltypes=[String,String,Int])
+                        allowcomments=true,header=false,eltypes=[String,String,Int],names=[:name1, :name2, :common_flavors])
 end
+
+function reduce_recipe(df::DataFrames.DataFrame, row::Int; itr=2:size(df,2))
+  [df[row,i] for i in itr if typeof(df[row,i])==String]
+end
+
+function read_recipes()
+  raw=readtable(joinpath(thisdir,"data","srep00196-s3.csv"), allowcomments=true,header=false)
+  df = DataFrames.DataFrame()
+  df[:region] = raw[:,1]
+  df[:recipe] = [reduce_recipe(raw, i) for i in 1:size(raw,1)]
+  return df
+end
+
+"""
+  Reads ingr_info.tsv into a DataFrame with columns :id,  :name, and :category, examples of the last being meat, plant, plant derivative etc. The first two columns respectively give a unique id and recognizable name of various ingredients.
+  """
+function read_ingr_info()
+  readtable(joinpath(thisdir,"data","ingr_info.tsv"),
+            allowcomments=true,header=false,eltypes=[Int,String,String],names=[:id, :name, :category])
+end
+
+#= Vestigial cruft
 
 immutable Flavornet
   ingredients::Vector{String}
@@ -44,13 +71,7 @@ immutable Flavornet
   
 end
 
-function read_recipes()
-  readtable(joinpath(thisdir,"data","srep00196-s3.csv"), allowcomments=true,header=false)
-end
 
-function reduce_recipe(df::DataFrames.DataFrame, row::Int; itr=2:size(df,2))
-  [df[row,i] for i in itr if typeof(df[row,i])==String]
-end
 
 immutable Recipes
   world::Dict{String,Vector{Vector{String}}}
@@ -70,13 +91,7 @@ immutable Recipes
     
 end
 
-"""
-  Reads ingr_info.tsv into a DataFrame with columns "id",  "name", and "category", examples of the last being meat, plant, plant derivative etc.
-  """
-function read_ingr_info()
-  readtable(joinpath(thisdir,"data","ingr_info.tsv"),
-            allowcomments=true,header=false,eltypes=[Int,String,String],names=[:id, :name, :category])
-end
+
 
 function categories()
   tbl = read_ingr_info()
@@ -86,3 +101,4 @@ function categories()
   end
   ans
 end
+=#
