@@ -44,6 +44,7 @@ function fractional_overlap(cuisine_ingredients::Dict{String,Vector{String}})
   return ans
 end
 
+#= cruft
 """
   Given a Flavornet object and parameter k, apply k-means clustering to W returning the result and a list of ingredients assigned to each cluster.
   """
@@ -63,3 +64,4 @@ end
 function dffind{T}(df::DataFrame, value::T, column::Symbol)
   df[df[column].==value,:]
 end
+=#
