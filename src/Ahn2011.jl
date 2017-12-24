@@ -1,5 +1,7 @@
 module Ahn2011
 
+export compound_ids, ingredient_ids, ingredient_compounds, cuisines
+
 thisdir = dirname(@__FILE__())
 
 """ compound_ids()
@@ -20,16 +22,16 @@ end
 
 """ ingredient_compounds()
 
-    Returns a sparse incidence (0 or 1)  matrix, M, where M[i,j] = 1 if ingredient i contains compound j and M[i,j]=0 otherwise. Row indices match indices of ingredient names as returned by ingredient_ids(). Column indices match row indices of compound names and CAS numbers as returned by compound_ids().
+    Returns a sparse incidence (0 or 1)  matrix, M, where M[i,j] = 1 if ingredient i contains compound j and M[i,j]=0 otherwise. Row indices match row indices of ingredient information as returned by ingredient_ids(). Column indices match row indices of compound information  as returned by compound_ids().
     """
-function ingr_comp()::SparseMatrixCSC{Int,Int}
+function ingredient_compounds()::SparseMatrixCSC{Int,Int}
     tmp = readdlm(joinpath(thisdir,"data/ingr_comp.tsv"),Int)+1 # +1 for 1-origin conversion
-    return sparse(1+tmp[:,1],1+tmp[:,2],1)
+    return sparse(tmp[:,1],tmp[:,2],1)
 end
 
 """ cuisines()
     
-    Returns a dictionary of local "cuisines" indexed by region. Each "cuisine" is a sparse incidence (0 or 1) matrix in which each row represents a recipe and each column represents an ingredient. Column indices match indices of ingredient names as returned by ingredient_ids().
+    Returns a dictionary of local "cuisines" indexed by region. Each "cuisine" is a sparse incidence (0 or 1) matrix in which each row represents a recipe and each column represents an ingredient. Column indices match the row indices of ingredient names as returned by ingredient_ids().
     """
 function cuisines()::Dict{String,SparseMatrixCSC{Int,Int}}
     rawdata = readdlm(joinpath(thisdir,"data/srep00196-s3.csv"),',',String)
