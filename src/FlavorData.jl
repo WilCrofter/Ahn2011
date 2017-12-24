@@ -1,4 +1,4 @@
-module Ahn2011
+module FlavorData
 
 export compound_ids, ingredient_ids, ingredient_compounds, cuisines
 

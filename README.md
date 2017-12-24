@@ -1,13 +1,11 @@
-# Ahn 2011
+# Flavor Data
 
-Copyright (c) 2017-07-26: W. R. Bauer
-
-A Julia wrapper module for data compiled by Ahn *et. al.* [Flavor network and the principles of food pairing](https://www.nature.com/articles/srep00196) Nature: SCIENTIFIC REPORTS | 1 : 196 | DOI: 10.1038/srep00196 (2011), and Ahn *et. al.*[THE FLAVOR NETWORK](http://yongyeol.com/2013/05/17/paper-flavor-network.html) Leonardo, Volume 46, Issue 3, June 2013, p.272-273. The papers and data are open access, the first paper and data licensed as [CC-BY-NA-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/us/) and the second as [CC-BY-NA-SA 4.0](https://creativecommons.org/licenses/by/4.0/). The Julia code is GPLv3.
+A Julia wrapper module for data compiled by Ahn *et. al.* [Flavor network and the principles of food pairing](https://www.nature.com/articles/srep00196) Nature: SCIENTIFIC REPORTS | 1 : 196 | DOI: 10.1038/srep00196 (2011), and Ahn *et. al.*[THE FLAVOR NETWORK](http://yongyeol.com/2013/05/17/paper-flavor-network.html) Leonardo, Volume 46, Issue 3, June 2013, p.272-273. The papers and data are open access. The first paper and data is licensed as [CC-BY-NA-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/us/) and the second as [CC-BY-NA-SA 4.0](https://creativecommons.org/licenses/by/4.0/). The Julia code is GPLv3, Copyright (c) 2017-07-26: W. R. Bauer.
 
 The module exports four functions, `compound_ids()`, `ingredient_ids()`, `ingredient_compounds()`, and `cuisines()`. The first two list chemical compound and ingredient information, respectively.
 
 ```
-julia> using Ahn2011
+julia> using FlavorData
 
 julia> cids = compound_ids()
 1107×2 Array{String,2}:
@@ -80,7 +78,7 @@ julia> sa = cs["SoutheastAsian"]
   [332 , 1524]  =  1
 ```
 
-Thus there are 547 Southeast Asian "recipes" (really just ingredients.) To list the ingredients of recipe 7,
+Thus there are 547 Southeast Asian "recipes." To list the ingredients of recipe 7,
 ```
 julia> iids[find(sa[7,:].==1),:]
 14×2 Array{String,2}:
